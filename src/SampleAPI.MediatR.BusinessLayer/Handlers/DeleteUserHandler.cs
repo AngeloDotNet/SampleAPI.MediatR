@@ -25,11 +25,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, bool>
 
         UserDTO user = new()
         {
-            Id = entity.Id,
-            Cognome = entity.Cognome,
-            Nome = entity.Nome,
-            Telefono = entity.Telefono,
-            Email = entity.Email
+            Id = entity.Id
         };
 
         var result = await userService.DeleteUser(user.Id);

@@ -99,12 +99,12 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteUserAsync(UserDTO request)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUserAsync(int id)
     {
         try
         {
-            var result = await mediator.Send(new DeleteUserCommand(request.Id));
+            var result = await mediator.Send(new DeleteUserCommand(id));
 
             if (!result)
             {
