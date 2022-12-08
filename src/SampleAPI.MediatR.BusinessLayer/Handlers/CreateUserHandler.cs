@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SampleAPI.MediatR.BusinessLayer.Commands;
 using SampleAPI.MediatR.DataAccessLayer.Services;
-using SampleAPI.MediatR.Shared.Models.Requests;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Handlers;
 
@@ -16,7 +16,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, bool>
 
     public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        UserRequest user = new()
+        UserDTO user = new()
         {
             Cognome = request.Cognome,
             Nome = request.Nome,

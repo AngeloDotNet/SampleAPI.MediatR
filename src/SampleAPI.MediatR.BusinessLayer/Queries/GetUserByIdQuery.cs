@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using SampleAPI.MediatR.Shared.Models.Response;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Queries;
 
-public class GetUserByIdQuery : IRequest<UserResponse>
+public class GetUserByIdQuery : IRequest<UserDTO>
 {
     public int Id { get; set; }
 

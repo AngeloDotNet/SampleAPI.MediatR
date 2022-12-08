@@ -1,6 +1,6 @@
-﻿namespace SampleAPI.MediatR.Shared.Models.Requests;
+﻿namespace SampleAPI.MediatR.Shared.Models.DTO;
 
-public class UserRequest
+public class UserDTO
 {
     public int Id { get; set; }
     public string Cognome { get; set; }

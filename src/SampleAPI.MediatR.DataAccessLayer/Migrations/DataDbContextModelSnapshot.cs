@@ -16,7 +16,7 @@ namespace SampleAPI.MediatR.DataAccessLayer.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
 
-            modelBuilder.Entity("SampleAPI.MediatR.Shared.Entities.User", b =>
+            modelBuilder.Entity("SampleAPI.MediatR.Shared.Models.DTO.UserDTO", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

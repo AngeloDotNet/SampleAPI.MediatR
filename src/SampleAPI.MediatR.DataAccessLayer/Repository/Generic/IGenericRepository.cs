@@ -1,13 +1,10 @@
-﻿using SampleAPI.MediatR.Shared.Models.Requests;
-using SampleAPI.MediatR.Shared.Models.Response;
+﻿namespace SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
 
-namespace SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
-
-public interface IGenericRepository
+public interface IGenericRepository<T> where T : class
 {
-    Task<List<UserResponse>> GetAllAsync();
-    Task<UserResponse> GetByIdAsync(int id);
-    Task<bool> CreateAsync(UserRequest entity);
-    Task<bool> UpdateAsync(UserRequest entity);
-    Task<bool> DeleteAsync(UserRequest entity);
+    Task<List<T>> GetAllAsync();
+    Task<T> GetByIdAsync(int id);
+    Task<bool> CreateAsync(T entity);
+    Task<bool> UpdateAsync(T entity);
+    Task<bool> DeleteAsync(T entity);
 }

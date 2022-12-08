@@ -1,24 +1,25 @@
 ﻿using MediatR;
 using SampleAPI.MediatR.BusinessLayer.Queries;
-using SampleAPI.MediatR.Shared.Models.Response;
+using SampleAPI.MediatR.DataAccessLayer.Services;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Handlers;
 
-public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserResponse>
+public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserDTO>
 {
     private readonly IMediator mediator;
+    private readonly IUserService userService;
 
-    public GetUserByIdHandler(IMediator mediator)
+    public GetUserByIdHandler(IMediator mediator, IUserService userService)
     {
         this.mediator = mediator;
+        this.userService = userService;
     }
 
-    public async Task<UserResponse> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+    public async Task<UserDTO> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
-        List<UserResponse> users = await mediator.Send(new GetUsersListQuery(), cancellationToken);
+        UserDTO result = await userService.GetUserAsync(request.Id);
 
-        var result = users.FirstOrDefault(x => x.Id == request.Id);
-
-        return result;
+        return await Task.FromResult(result);
     }
 }

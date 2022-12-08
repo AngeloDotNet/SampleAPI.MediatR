@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using SampleAPI.MediatR.Shared.Models.Response;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Queries;
 
-public class GetUsersListQuery : IRequest<List<UserResponse>>
+public class GetUsersListQuery : IRequest<List<UserDTO>>
 {
 }

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SampleAPI.MediatR.BusinessLayer.Commands;
 using SampleAPI.MediatR.DataAccessLayer.Services;
-using SampleAPI.MediatR.Shared.Models.Requests;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Handlers;
 
@@ -23,13 +23,13 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, bool>
             return false;
         }
 
-        UserRequest user = new()
+        UserDTO user = new()
         {
-            Id = entity.Id,
-            Cognome = entity.Cognome,
-            Nome = entity.Nome,
-            Telefono = entity.Telefono,
-            Email = entity.Email
+            Id = request.Id,
+            Cognome = request.Cognome,
+            Nome = request.Nome,
+            Telefono = request.Telefono,
+            Email = request.Email
         };
 
         var result = await userService.UpdateUser(user);

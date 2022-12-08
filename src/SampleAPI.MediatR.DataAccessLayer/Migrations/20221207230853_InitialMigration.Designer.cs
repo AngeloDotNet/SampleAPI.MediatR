@@ -10,7 +10,7 @@ using SampleAPI.MediatR.DataAccessLayer;
 namespace SampleAPI.MediatR.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20221206100627_InitialMigration")]
+    [Migration("20221207230853_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace SampleAPI.MediatR.DataAccessLayer.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
 
-            modelBuilder.Entity("SampleAPI.MediatR.Shared.Entities.User", b =>
+            modelBuilder.Entity("SampleAPI.MediatR.Shared.Models.DTO.UserDTO", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

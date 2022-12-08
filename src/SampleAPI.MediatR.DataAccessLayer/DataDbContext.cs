@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SampleAPI.MediatR.Shared.Entities;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.DataAccessLayer;
 
@@ -9,13 +9,13 @@ public partial class DataDbContext : DbContext
     {
     }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<UserDTO> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<UserDTO>(entity =>
         {
             entity.ToTable("Users");
             entity.HasKey(user => user.Id);

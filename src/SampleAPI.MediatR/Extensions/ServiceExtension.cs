@@ -10,12 +10,6 @@ public static class ServiceExtension
 {
     public static IServiceCollection AddDependencyInjectionServices(this IServiceCollection services, IConfiguration configuration)
     {
-        //services.AddDbContextPool<DataDbContext>(optionsBuilder =>
-        //{
-        //    string connectionString = configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
-        //    optionsBuilder.UseSqlite(connectionString);
-        //});
-
         string connectionString = configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
 
         services.AddDbContext<DataDbContext>(options =>

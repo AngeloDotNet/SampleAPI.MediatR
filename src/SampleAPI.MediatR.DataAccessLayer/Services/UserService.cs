@@ -1,6 +1,5 @@
 ﻿using SampleAPI.MediatR.DataAccessLayer.UnitOfWork;
-using SampleAPI.MediatR.Shared.Models.Requests;
-using SampleAPI.MediatR.Shared.Models.Response;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.DataAccessLayer.Services;
 
@@ -13,73 +12,100 @@ public class UserService : IUserService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<UserResponse>> GetAllUsersAsync()
+    public async Task<List<UserDTO>> GetAllUsersAsync()
     {
-        var result = await _unitOfWork.userRepository.GetAllAsync();
+        var result = await _unitOfWork.Users.GetAllAsync();
 
         return result;
     }
 
-    public async Task<UserResponse> GetUserAsync(int id)
+    public async Task<UserDTO> GetUserAsync(int userId)
     {
-        var user = await _unitOfWork.userRepository.GetByIdAsync(id);
-
-        if (user == null)
+        if (userId > 0)
         {
-            return null;
+            var result = await _unitOfWork.Users.GetByIdAsync(userId);
+
+            if (result != null)
+            {
+                return result;
+            }
         }
 
-        return user;
+        return null;
     }
 
-    public async Task<bool> CreateUser(UserRequest request)
+    public async Task<bool> CreateUser(UserDTO request)
     {
-        if (request == null)
+        if (request != null)
         {
-            return false;
+            var result = await _unitOfWork.Users.CreateAsync(request);
+
+            if (result == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
-        var response = await _unitOfWork.userRepository.CreateAsync(request);
-
-        if (!response)
-        {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
-    public async Task<bool> UpdateUser(UserRequest request)
+    public async Task<bool> UpdateUser(UserDTO request)
     {
-        if (request == null)
+        if (request != null)
         {
-            return false;
+            var user = await _unitOfWork.Users.GetByIdAsync(request.Id);
+
+            if (user != null)
+            {
+                UserDTO entity = new()
+                {
+                    Id = request.Id,
+                    Cognome = request.Cognome,
+                    Nome = request.Nome,
+                    Email = request.Email,
+                    Telefono = request.Telefono
+                };
+
+                var result = await _unitOfWork.Users.UpdateAsync(entity);
+
+                if (result == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-        var response = await _unitOfWork.userRepository.UpdateAsync(request);
-
-        if (!response)
-        {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
-    public async Task<bool> DeleteUser(UserRequest request)
+    public async Task<bool> DeleteUser(int Id)
     {
-        if (request.Id == 0)
+        if (Id > 0)
         {
-            return false;
+            var userDetail = await _unitOfWork.Users.GetByIdAsync(Id);
+
+            if (userDetail != null)
+            {
+                var result = await _unitOfWork.Users.DeleteAsync(userDetail);
+
+                if (result == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-        var response = await _unitOfWork.userRepository.DeleteAsync(request);
-
-        if (!response)
-        {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 }

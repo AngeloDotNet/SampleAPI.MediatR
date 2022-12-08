@@ -4,5 +4,7 @@ namespace SampleAPI.MediatR.DataAccessLayer.UnitOfWork;
 
 public interface IUnitOfWork : IDisposable
 {
-    IUserRepository userRepository { get; set; }
+    IUserRepository Users { get; }
+
+    //int Save();
 }

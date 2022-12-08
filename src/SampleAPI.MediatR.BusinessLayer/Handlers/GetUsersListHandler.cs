@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using SampleAPI.MediatR.BusinessLayer.Queries;
 using SampleAPI.MediatR.DataAccessLayer.Services;
-using SampleAPI.MediatR.Shared.Models.Response;
+using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Handlers;
 
-public class GetUsersListHandler : IRequestHandler<GetUsersListQuery, List<UserResponse>>
+public class GetUsersListHandler : IRequestHandler<GetUsersListQuery, List<UserDTO>>
 {
     private readonly IUserService userService;
 
@@ -14,9 +14,9 @@ public class GetUsersListHandler : IRequestHandler<GetUsersListQuery, List<UserR
         this.userService = userService;
     }
 
-    public async Task<List<UserResponse>> Handle(GetUsersListQuery request, CancellationToken cancellationToken)
+    public async Task<List<UserDTO>> Handle(GetUsersListQuery request, CancellationToken cancellationToken)
     {
-        List<UserResponse> result = await userService.GetAllUsersAsync();
+        List<UserDTO> result = await userService.GetAllUsersAsync();
 
         return await Task.FromResult(result);
     }

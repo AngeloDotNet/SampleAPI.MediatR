@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SampleAPI.MediatR.BusinessLayer.Commands;
 using SampleAPI.MediatR.BusinessLayer.Queries;
-using SampleAPI.MediatR.Shared.Models.Requests;
+using SampleAPI.MediatR.Shared.Models.DTO;
 using System.Net.Mime;
 
 namespace SampleAPI.MediatR.Controllers;
@@ -60,7 +60,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUserAsync(UserRequest request)
+    public async Task<IActionResult> CreateUserAsync(UserDTO request)
     {
         try
         {
@@ -80,7 +80,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUserAsync(UserRequest request)
+    public async Task<IActionResult> UpdateUserAsync(UserDTO request)
     {
         try
         {
@@ -100,7 +100,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteUserAsync(UserRequest request)
+    public async Task<IActionResult> DeleteUserAsync(UserDTO request)
     {
         try
         {

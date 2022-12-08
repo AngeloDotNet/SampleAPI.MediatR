@@ -5,12 +5,12 @@ namespace SampleAPI.MediatR.DataAccessLayer.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DataDbContext dbContext;
-    public IUserRepository userRepository { get; set; }
+    public IUserRepository Users { get; }
 
-    public UnitOfWork(DataDbContext dbContext, IUserRepository userRepository)
+    public UnitOfWork(DataDbContext dbContext, IUserRepository users)
     {
         this.dbContext = dbContext;
-        this.userRepository = userRepository;
+        Users = users;
     }
 
     public void Dispose()

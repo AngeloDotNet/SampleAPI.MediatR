@@ -1,117 +1,86 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SampleAPI.MediatR.Shared.Entities;
-using SampleAPI.MediatR.Shared.Models.Requests;
-using SampleAPI.MediatR.Shared.Models.Response;
 
 namespace SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
 
-public abstract class GenericRepository : IGenericRepository
+public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    protected readonly DataDbContext _dbContext;
+    private readonly DataDbContext dbContext;
 
-    protected GenericRepository(DataDbContext context)
+    protected GenericRepository(DataDbContext dbContext)
     {
-        _dbContext = context;
+        this.dbContext = dbContext;
     }
 
-    public async Task<List<UserResponse>> GetAllAsync()
+    public async Task<List<T>> GetAllAsync()
     {
-        IQueryable<User> baseQuery = _dbContext.Users;
-
-        var queryLinq = baseQuery
-            .AsNoTracking();
-
-        var result = await queryLinq
-            .Select(utente => UserResponse.ToUserViewModel(utente))
-            .ToListAsync();
-
-        return result;
-    }
-
-    public async Task<UserResponse> GetByIdAsync(int id)
-    {
-        var queryLinq = _dbContext.Users
+        return await dbContext.Set<T>()
             .AsNoTracking()
-            .Where(utente => utente.Id == id)
-            .Select(utente => UserResponse.ToUserViewModel(utente));
-
-        var result = await queryLinq.FirstOrDefaultAsync();
-
-        return result;
+            .ToListAsync();
     }
 
-    public async Task<bool> CreateAsync(UserRequest entity)
+    public async Task<T> GetByIdAsync(int id)
     {
-        User user = new()
-        {
-            Id = entity.Id,
-            Cognome = entity.Cognome,
-            Nome = entity.Nome,
-            Telefono = entity.Telefono,
-            Email = entity.Email
-        };
+        var entity = await dbContext.Set<T>().FindAsync(id);
 
-        _dbContext.Add(user);
-
-        try
+        if (entity == null)
         {
-            await _dbContext.SaveChangesAsync();
+            return null;
         }
-        catch
+
+        dbContext.Entry(entity).State = EntityState.Detached;
+
+        return entity;
+    }
+
+    public async Task<bool> CreateAsync(T entity)
+    {
+        dbContext.Set<T>().Add(entity);
+
+        var result = await dbContext.SaveChangesAsync();
+
+        dbContext.Entry(entity).State = EntityState.Detached;
+
+        if (result > 0)
+        {
+            return true;
+        }
+        else
         {
             return false;
         }
-
-        return true;
     }
 
-    public async Task<bool> UpdateAsync(UserRequest entity)
+    public async Task<bool> UpdateAsync(T entity)
     {
-        var user = await _dbContext.Users.FindAsync(entity.Id);
+        dbContext.Set<T>().Update(entity);
 
-        if (user == null)
+        var result = await dbContext.SaveChangesAsync();
+
+        dbContext.Entry(entity).State = EntityState.Detached;
+
+        if (result > 0)
         {
-            throw new Exception();
+            return true;
         }
-
-        user.Id = entity.Id;
-        user.Cognome = entity.Cognome;
-        user.Nome = entity.Nome;
-        user.Telefono = entity.Telefono;
-        user.Email = entity.Email;
-
-        try
-        {
-            await _dbContext.SaveChangesAsync();
-        }
-        catch
+        else
         {
             return false;
         }
-
-        return true;
     }
 
-    public async Task<bool> DeleteAsync(UserRequest entity)
+    public async Task<bool> DeleteAsync(T entity)
     {
-        User user = await _dbContext.Users.FindAsync(entity.Id);
+        dbContext.Set<T>().Remove(entity);
 
-        if (user == null)
+        var result = await dbContext.SaveChangesAsync();
+
+        if (result > 0)
         {
-            throw new Exception();
+            return true;
         }
-
-        _dbContext.Remove(user);
-
-        try
-        {
-            await _dbContext.SaveChangesAsync();
-        }
-        catch
+        else
         {
             return false;
         }
-
-        return true;
     }
 }
