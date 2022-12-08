@@ -64,7 +64,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            var result = await mediator.Send(new CreateUserCommand(request.Cognome, request.Nome, request.Telefono, request.Email));
+            var result = await mediator.Send(new CreateUserCommand(request));
 
             if (!result)
             {
@@ -84,7 +84,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            var result = await mediator.Send(new UpdateUserCommand(request.Id, request.Cognome, request.Nome, request.Telefono, request.Email));
+            var result = await mediator.Send(new UpdateUserCommand(request));
 
             if (!result)
             {
