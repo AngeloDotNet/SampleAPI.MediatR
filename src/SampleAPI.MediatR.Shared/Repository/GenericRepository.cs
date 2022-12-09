@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SampleAPI.MediatR.DataAccessLayer;
 
-namespace SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
+namespace SampleAPI.MediatR.Shared.Repository;
 
 public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
 {

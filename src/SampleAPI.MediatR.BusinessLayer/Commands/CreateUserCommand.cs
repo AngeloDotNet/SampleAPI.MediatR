@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using SampleAPI.MediatR.Shared.Models.DTO;
+using SampleAPI.MediatR.Shared.Models.InputModels;
 
 namespace SampleAPI.MediatR.BusinessLayer.Commands;
 
@@ -10,11 +10,11 @@ public class CreateUserCommand : IRequest<bool>
     public string Telefono { get; set; }
     public string Email { get; set; }
 
-    public CreateUserCommand(UserDTO request)
+    public CreateUserCommand(UserCreateInputModel inputModel)
     {
-        Cognome = request.Cognome;
-        Nome = request.Nome;
-        Telefono = request.Telefono;
-        Email = request.Email;
+        Cognome = inputModel.Cognome;
+        Nome = inputModel.Nome;
+        Telefono = inputModel.Telefono;
+        Email = inputModel.Email;
     }
 }

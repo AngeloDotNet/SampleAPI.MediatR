@@ -1,5 +1,6 @@
 ﻿using SampleAPI.MediatR.DataAccessLayer.UnitOfWork;
-using SampleAPI.MediatR.Shared.Models.DTO;
+using SampleAPI.MediatR.Shared.Models.Entities;
+using SampleAPI.MediatR.Shared.Models.ViewModels;
 
 namespace SampleAPI.MediatR.DataAccessLayer.Services;
 
@@ -12,14 +13,26 @@ public class UserService : IUserService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<UserDTO>> GetAllUsersAsync()
+    public async Task<List<UserViewModel>> GetAllUsersAsync()
     {
-        var result = await _unitOfWork.Users.GetAllAsync();
+        IEnumerable<User> baseQuery = await _unitOfWork.Users.GetAllAsync();
 
-        return result;
+        int countRows = baseQuery.Count();
+
+        if (countRows > 0)
+        {
+            List<UserViewModel> viewModels = baseQuery.Select(x => UserViewModel.FromEntity(x)).ToList();
+
+            if (viewModels != null)
+            {
+                return viewModels;
+            }
+        }
+
+        return null;
     }
 
-    public async Task<UserDTO> GetUserAsync(int userId)
+    public async Task<UserViewModel> GetUserAsync(int userId)
     {
         if (userId > 0)
         {
@@ -27,14 +40,19 @@ public class UserService : IUserService
 
             if (result != null)
             {
-                return result;
+                UserViewModel viewModel = UserViewModel.FromEntity(result);
+
+                if (viewModel != null)
+                {
+                    return viewModel;
+                }
             }
         }
 
         return null;
     }
 
-    public async Task<bool> CreateUser(UserDTO request)
+    public async Task<bool> CreateUser(User request)
     {
         if (request != null)
         {
@@ -52,7 +70,7 @@ public class UserService : IUserService
         return false;
     }
 
-    public async Task<bool> UpdateUser(UserDTO request)
+    public async Task<bool> UpdateUser(User request)
     {
         if (request != null)
         {

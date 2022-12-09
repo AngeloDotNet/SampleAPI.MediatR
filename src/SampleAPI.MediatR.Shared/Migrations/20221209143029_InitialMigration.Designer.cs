@@ -7,10 +7,10 @@ using SampleAPI.MediatR.DataAccessLayer;
 
 #nullable disable
 
-namespace SampleAPI.MediatR.DataAccessLayer.Migrations
+namespace SampleAPI.MediatR.Shared.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20221207230853_InitialMigration")]
+    [Migration("20221209143029_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

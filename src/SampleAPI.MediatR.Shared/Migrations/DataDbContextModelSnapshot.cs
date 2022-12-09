@@ -6,7 +6,7 @@ using SampleAPI.MediatR.DataAccessLayer;
 
 #nullable disable
 
-namespace SampleAPI.MediatR.DataAccessLayer.Migrations
+namespace SampleAPI.MediatR.Shared.Migrations
 {
     [DbContext(typeof(DataDbContext))]
     partial class DataDbContextModelSnapshot : ModelSnapshot

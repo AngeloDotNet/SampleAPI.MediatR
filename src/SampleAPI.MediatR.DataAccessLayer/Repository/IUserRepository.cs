@@ -1,9 +1,8 @@
-﻿using SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
-using SampleAPI.MediatR.Shared.Models.DTO;
+﻿using SampleAPI.MediatR.Shared.Models.Entities;
+using SampleAPI.MediatR.Shared.Repository;
 
-namespace SampleAPI.MediatR.DataAccessLayer.Repository
+namespace SampleAPI.MediatR.DataAccessLayer.Repository;
+
+public interface IUserRepository : IGenericRepository<User>
 {
-    public interface IUserRepository : IGenericRepository<UserDTO>
-    {
-    }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SampleAPI.MediatR.Shared.Models.InputModels;
 
 namespace SampleAPI.MediatR.BusinessLayer.Commands;
 
@@ -6,8 +7,8 @@ public class DeleteUserCommand : IRequest<bool>
 {
     public int Id { get; set; }
 
-    public DeleteUserCommand(int id)
+    public DeleteUserCommand(UserDeleteInputModel inputModel)
     {
-        Id = id;
+        Id = inputModel.Id;
     }
 }

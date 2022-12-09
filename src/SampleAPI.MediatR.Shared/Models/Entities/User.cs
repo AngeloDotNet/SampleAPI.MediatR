@@ -1,6 +1,6 @@
-﻿namespace SampleAPI.MediatR.Shared.Models.DTO;
+﻿namespace SampleAPI.MediatR.Shared.Models.Entities;
 
-public partial class UserDTO
+public partial class User
 {
     public int Id { get; set; }
     public string Cognome { get; set; }
@@ -8,7 +8,7 @@ public partial class UserDTO
     public string Telefono { get; set; }
     public string Email { get; set; }
 
-    public UserDTO(int id, string cognome, string nome, string telefono, string email)
+    public User(int id, string cognome, string nome, string telefono, string email)
     {
         Id = id;
         Cognome = cognome;

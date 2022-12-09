@@ -1,4 +1,4 @@
-﻿namespace SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
+﻿namespace SampleAPI.MediatR.Shared.Repository;
 
 public interface IGenericRepository<T> where T : class
 {

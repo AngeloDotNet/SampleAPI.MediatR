@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace SampleAPI.MediatR.DataAccessLayer.Migrations
+namespace SampleAPI.MediatR.Shared.Migrations
 {
     public partial class InitialMigration : Migration
     {

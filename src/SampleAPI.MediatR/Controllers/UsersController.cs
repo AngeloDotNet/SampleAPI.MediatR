@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SampleAPI.MediatR.BusinessLayer.Commands;
 using SampleAPI.MediatR.BusinessLayer.Queries;
-using SampleAPI.MediatR.Shared.Models.DTO;
+using SampleAPI.MediatR.Shared.Models.InputModels;
 using System.Net.Mime;
 
 namespace SampleAPI.MediatR.Controllers;
@@ -26,7 +26,7 @@ public class UsersController : ControllerBase
         {
             var result = await mediator.Send(new GetUsersListQuery());
 
-            if (result.Count == 0)
+            if (result == null)
             {
                 return NotFound();
             }
@@ -60,7 +60,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUserAsync(UserDTO request)
+    public async Task<IActionResult> CreateUserAsync(UserCreateInputModel request)
     {
         try
         {
@@ -80,7 +80,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUserAsync(UserDTO request)
+    public async Task<IActionResult> UpdateUserAsync(UserEditInputModel request)
     {
         try
         {
@@ -99,12 +99,12 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteUserAsync(int id)
+    [HttpDelete]
+    public async Task<IActionResult> DeleteUserAsync(UserDeleteInputModel request)
     {
         try
         {
-            var result = await mediator.Send(new DeleteUserCommand(id));
+            var result = await mediator.Send(new DeleteUserCommand(request));
 
             if (!result)
             {

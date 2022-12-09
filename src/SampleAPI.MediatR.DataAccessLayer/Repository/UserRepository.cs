@@ -1,12 +1,11 @@
-﻿using SampleAPI.MediatR.DataAccessLayer.Repository.Generic;
-using SampleAPI.MediatR.Shared.Models.DTO;
+﻿using SampleAPI.MediatR.Shared.Models.Entities;
+using SampleAPI.MediatR.Shared.Repository;
 
-namespace SampleAPI.MediatR.DataAccessLayer.Repository
+namespace SampleAPI.MediatR.DataAccessLayer.Repository;
+
+public class UserRepository : GenericRepository<User>, IUserRepository
 {
-    public class UserRepository : GenericRepository<UserDTO>, IUserRepository
+    public UserRepository(DataDbContext dbContext) : base(dbContext)
     {
-        public UserRepository(DataDbContext dbContext) : base(dbContext)
-        {
-        }
     }
 }

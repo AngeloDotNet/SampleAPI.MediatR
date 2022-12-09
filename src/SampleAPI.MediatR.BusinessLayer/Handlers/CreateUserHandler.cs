@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using SampleAPI.MediatR.BusinessLayer.Commands;
 using SampleAPI.MediatR.DataAccessLayer.Services;
-using SampleAPI.MediatR.Shared.Models.DTO;
+using SampleAPI.MediatR.Shared.Models.Entities;
 
 namespace SampleAPI.MediatR.BusinessLayer.Handlers;
 
 public class CreateUserHandler : IRequestHandler<CreateUserCommand, bool>
 {
     private readonly IUserService userService;
+    private readonly int userId = 0;
 
     public CreateUserHandler(IUserService userService)
     {
@@ -16,7 +17,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, bool>
 
     public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var entity = new UserDTO(0, request.Cognome, request.Nome, request.Telefono, request.Email);
+        var entity = new User(userId, request.Cognome, request.Nome, request.Telefono, request.Email);
 
         var result = await userService.CreateUser(entity);
 

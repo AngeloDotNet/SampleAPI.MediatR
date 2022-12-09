@@ -13,7 +13,9 @@ public static class ServiceExtension
         string connectionString = configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
 
         services.AddDbContext<DataDbContext>(options =>
-        options.UseSqlite(connectionString, b => b.MigrationsAssembly(typeof(DataDbContext).Assembly.FullName)));
+            options.UseSqlite(connectionString, migration =>
+                migration.MigrationsAssembly(typeof(DataDbContext).Assembly.FullName))
+        );
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
