@@ -60,16 +60,7 @@ public class UserService : IUserService
 
             if (user != null)
             {
-                UserDTO entity = new()
-                {
-                    Id = request.Id,
-                    Cognome = request.Cognome,
-                    Nome = request.Nome,
-                    Email = request.Email,
-                    Telefono = request.Telefono
-                };
-
-                var result = await _unitOfWork.Users.UpdateAsync(entity);
+                var result = await _unitOfWork.Users.UpdateAsync(request);
 
                 if (result == true)
                 {

@@ -16,23 +16,16 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, bool>
 
     public async Task<bool> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var entity = await userService.GetUserAsync(request.Id);
+        var user = await userService.GetUserAsync(request.Id);
 
-        if (entity == null)
+        if (user == null)
         {
             return false;
         }
 
-        UserDTO user = new()
-        {
-            Id = request.Id,
-            Cognome = request.Cognome,
-            Nome = request.Nome,
-            Telefono = request.Telefono,
-            Email = request.Email
-        };
+        var entity = new UserDTO(request.Id, request.Cognome, request.Nome, request.Telefono, request.Email);
 
-        var result = await userService.UpdateUser(user);
+        var result = await userService.UpdateUser(entity);
 
         if (!result)
         {

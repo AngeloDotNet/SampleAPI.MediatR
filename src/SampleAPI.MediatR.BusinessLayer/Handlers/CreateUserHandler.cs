@@ -16,15 +16,9 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, bool>
 
     public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        UserDTO user = new()
-        {
-            Cognome = request.Cognome,
-            Nome = request.Nome,
-            Telefono = request.Telefono,
-            Email = request.Email
-        };
+        var entity = new UserDTO(0, request.Cognome, request.Nome, request.Telefono, request.Email);
 
-        var result = await userService.CreateUser(user);
+        var result = await userService.CreateUser(entity);
 
         if (!result)
         {

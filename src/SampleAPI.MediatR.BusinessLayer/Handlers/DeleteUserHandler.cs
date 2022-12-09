@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using SampleAPI.MediatR.BusinessLayer.Commands;
 using SampleAPI.MediatR.DataAccessLayer.Services;
-using SampleAPI.MediatR.Shared.Models.DTO;
 
 namespace SampleAPI.MediatR.BusinessLayer.Handlers;
 
@@ -23,12 +22,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, bool>
             return false;
         }
 
-        UserDTO user = new()
-        {
-            Id = entity.Id
-        };
-
-        var result = await userService.DeleteUser(user.Id);
+        var result = await userService.DeleteUser(entity.Id);
 
         if (!result)
         {
