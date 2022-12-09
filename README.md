@@ -1,1 +1,1 @@
-# SampleAPI.MediatR
+# SampleAPI MediatR

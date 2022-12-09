@@ -5,11 +5,17 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAPI.MediatR", "src\SampleAPI.MediatR\SampleAPI.MediatR.csproj", "{A0564B0E-2952-4FA2-BD47-D4D4B1340846}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAPI.MediatR.DataAccessLayer", "src\SampleAPI.MediatR.DataAccessLayer\SampleAPI.MediatR.DataAccessLayer.csproj", "{FD2050FE-E8F8-4F7F-9F0A-00D609E34996}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAPI.MediatR.DataAccessLayer", "src\SampleAPI.MediatR.DataAccessLayer\SampleAPI.MediatR.DataAccessLayer.csproj", "{FD2050FE-E8F8-4F7F-9F0A-00D609E34996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAPI.MediatR.Shared", "src\SampleAPI.MediatR.Shared\SampleAPI.MediatR.Shared.csproj", "{55A305AB-4FEA-479F-9366-5E7AB121EA8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAPI.MediatR.Shared", "src\SampleAPI.MediatR.Shared\SampleAPI.MediatR.Shared.csproj", "{55A305AB-4FEA-479F-9366-5E7AB121EA8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAPI.MediatR.BusinessLayer", "src\SampleAPI.MediatR.BusinessLayer\SampleAPI.MediatR.BusinessLayer.csproj", "{BA68AD77-6A81-4DCC-BC2D-0E210E42A054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAPI.MediatR.BusinessLayer", "src\SampleAPI.MediatR.BusinessLayer\SampleAPI.MediatR.BusinessLayer.csproj", "{BA68AD77-6A81-4DCC-BC2D-0E210E42A054}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8B67A74-1894-44FA-81E5-2E62523A1D89}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
